@@ -14,7 +14,7 @@ app.use(bodyParser.json())
 // Connection to MongoDB
 mongoose
     .connect(
-        'mongodb+srv://MyUsername:MyPassword@mycluster-rkncu.mongodb.net/MERN_TEST?retryWrites=true&w=majority',
+        'xxx',
         { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
     )
     .then(() => console.log('MongoDB Connected'))
