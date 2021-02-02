@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { Heading, Container, Skeleton, Stack, Box } from "@chakra-ui/react";
+import { Heading, Container, Skeleton, Stack } from "@chakra-ui/react";
 
 import { useParams, Link } from "react-router-dom";
 
@@ -37,15 +37,15 @@ const PostDetail = () => {
                         :
 
                         <div>
-                            <Box bg="tomato" w="100%" p={4} color="white">
-                                {postdetail.title}
-                            </Box>
-                            <Box bg="black" w="100%" p={4} color="white">
-                                {postdetail.description}
-                            </Box>
-                            <Box bg="grey" w="100%" p={4} color="white">
-                                <Link to={`/post/update/${postdetail._id}`}>EDIT</Link>
-                            </Box>
+                            <div className="card shadow my-4" key={postdetail._id}>
+                                <div class="card-header">{postdetail.title}</div>
+                                <div class="card-body">
+                                    <h5 class="card-title">{postdetail.description}</h5>
+                                </div>
+                                <div class="card-footer bg-transparent">
+                                    <Link className='btn btn-primary btn-md' to={`/post/update/${postdetail._id}`}>EDIT</Link>
+                                </div>
+                            </div>
                         </div>
                 }
 

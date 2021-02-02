@@ -1,9 +1,54 @@
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body,
+html {
+  background: #f0faee;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #f45b69;
+}
+
+.float-btn {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  right: 40px;
+  background-color: #ff4252;
+  color: #fff;
+  border-radius: 50px;
+  text-align: center;
+  box-shadow: 2px 2px 3px #999;
+}
+
+.card {
+  border-radius: 0%;
+  background-color: #f6f7eb;
+}
+
+.navbar {
+  padding: 1rem;
+  background-color: #f45b69;
+}
+
+.link {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+
+h1 {
+  color: #393e41;
+}
+
+.add-btn {
+  color: rgb(255, 255, 255);
+  background-color: #183446;
+  border-radius: 0%;
+  padding: 1rem 3rem;
+  text-decoration: none;
 }
