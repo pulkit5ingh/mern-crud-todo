@@ -43,7 +43,7 @@ const PostDetail = () => {
                                     <h5 class="card-title">{postdetail.description}</h5>
                                 </div>
                                 <div class="card-footer bg-transparent">
-                                    <Link className='btn btn-primary btn-md' to={`/post/update/${postdetail._id}`}>EDIT</Link>
+                                    <Link className='btn btn-primary btn-md' to={`/todo/update/${postdetail._id}`}>EDIT</Link>
                                 </div>
                             </div>
                         </div>
