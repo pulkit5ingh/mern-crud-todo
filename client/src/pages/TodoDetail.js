@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 
-import { Heading, Container, Skeleton, Stack } from "@chakra-ui/react";
-
 import { useParams, Link } from "react-router-dom";
 
 import { Get } from '../Util/Axios';
@@ -26,14 +24,14 @@ const PostDetail = () => {
 
     return (
         <div style={{ "padding": "1em 0" }}>
-            <Container>
-                <Heading p={4}>POST LIST !</Heading>
+            <div>
+                <h1 >POST LIST !</h1>
 
                 {
                     postdetail == null ?
-                        <Stack>
-                            <Skeleton height="60px" />
-                        </Stack>
+                        <>
+                            <p>Loading ...</p>
+                        </>
                         :
 
                         <div>
@@ -49,7 +47,7 @@ const PostDetail = () => {
                         </div>
                 }
 
-            </Container>
+            </div>
         </div >
     )
 }

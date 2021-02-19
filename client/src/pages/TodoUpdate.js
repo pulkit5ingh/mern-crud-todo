@@ -8,18 +8,6 @@ import { Get, Post } from '../Util/Axios';
 
 import axios from 'axios'
 
-import {
-    FormControl,
-    FormLabel,
-    Button,
-    Input,
-    Container,
-    Textarea,
-    FormErrorMessage
-} from "@chakra-ui/react"
-
-import { Heading, Skeleton, Stack } from "@chakra-ui/react";
-
 const PostUpdate = () => {
 
     const { updateId } = useParams();
@@ -57,19 +45,19 @@ const PostUpdate = () => {
 
     return (
         <div style={{ "padding": "1em 0" }}>
-            <Container>
-                <Heading p={4}>Update Post !</Heading>
+            <div className="container">
+                <h1 p={4}>Update Post !</h1>
 
                 {
                     postdetail == null ?
-                        <Stack>
-                            <Skeleton height="60px" />
-                        </Stack>
+                        <p>
+                            Loading.. ..
+                        </p>
                         :
 
                         <div>
                             <form onSubmit={handleSubmit(onSubmit)}>
-                                <FormControl isInvalid={errors.title}>
+                                {/* <FormControl isInvalid={errors.title}>
                                     <FormLabel>Title</FormLabel>
                                     <Controller
                                         name="title"
@@ -134,11 +122,11 @@ const PostUpdate = () => {
                                 </FormControl>
                                 <FormControl>
                                     <Button colorScheme="blue" type='submit'>Button</Button>
-                                </FormControl>
+                                </FormControl> */}
                             </form>
                         </div>
                 }
-            </Container>
+            </div>
         </div >
     )
 }
