@@ -1,40 +1,29 @@
 import React from 'react';
 
+import axios from "axios";
+
 import { useForm, Controller } from "react-hook-form";
 
 import { useHistory } from "react-router-dom";
 
-import { Post } from '../Util/Axios';
-
 const PostEdit = () => {
 
-    const { control, handleSubmit, errors } = useForm();
+    const { control, register, handleSubmit, errors } = useForm();
 
     const history = useHistory();
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         console.log("FORMMMMMMMMMMMMMM", data);
-        // Post('http://localhost:5000/add_post', {
-        //     title: data.title,
-        //     description: data.description,
-        // })
+        try {
+            const response = await axios.post(`http://localhost:5000/add_post/`,
+                { title: data.title, description: data.description }
+            );
+            history.push('/todos')
+        } catch (error) {
+            console.error(error);
+        }
 
-        // history.push('/post');
     };
-
-    // const onSubmitHandler = (event) => {
-    //     event.preventDefault();
-    //     Post('http://localhost:5000/add_blog',
-    //         {
-    //             title, description
-    //         }
-    //     )
-    //         .then(() => {
-    //             setTitle("");
-    //             setDescription('');
-    //         })
-    //         .catch(() => { });
-    // }
 
     return (
         <div className="container">
@@ -53,6 +42,7 @@ const PostEdit = () => {
                                         name="title"
                                         control={control}
                                         defaultValue=""
+                                        ref={register}
                                         rules={{
                                             required: {
                                                 value: true,
@@ -72,6 +62,7 @@ const PostEdit = () => {
                                     <input type="text" className="form-control"
                                         name="description"
                                         control={control}
+                                        ref={register}
                                         defaultValue=""
                                         rules={{
                                             required: {

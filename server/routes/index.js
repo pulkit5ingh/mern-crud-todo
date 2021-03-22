@@ -4,9 +4,10 @@ const router = express.Router();
 // model
 const Post = require('../models/Post');
 
-router.get('/all_posts', (req, res) => {
+// ok
+router.get('/all_posts', async (req, res) => {
 
-    Post.find({}, (err, result) => {
+    await Post.find({}, (err, result) => {
         if (err) throw err;
         if (result) {
             res.json(result)
@@ -14,13 +15,15 @@ router.get('/all_posts', (req, res) => {
     })
 })
 
-router.get('/post/:id', (req, res) => {
+
+// @ok
+router.get('/post/:id', async (req, res) => {
 
     const { id } = req.params;
 
     console.log(req.params)
 
-    Post.findById({ _id: id }, (err, result) => {
+    await Post.findById({ _id: id }, (err, result) => {
         if (err) throw err;
         if (result) {
             res.json(result);
@@ -34,29 +37,8 @@ router.get('/post/:id', (req, res) => {
 
 })
 
-
-router.get('/post/update/:id', (req, res) => {
-
-    const { id } = req.params;
-
-    console.log(req.params)
-
-    Post.findById({ _id: id }, (err, result) => {
-        if (err) throw err;
-        if (result) {
-            res.json(result);
-        }
-        else {
-            res.json({
-                message: "There is no post in this id !"
-            })
-        }
-    })
-
-})
-
-
-router.put('/post/update/:id', (req, res) => {
+// ok
+router.put('/post/update/:id', async (req, res) => {
 
     const { id } = req.params;
 
@@ -67,7 +49,7 @@ router.put('/post/update/:id', (req, res) => {
 
     console.log(data)
 
-    Post.findByIdAndUpdate({ _id: id },
+    await Post.findByIdAndUpdate({ _id: id },
         data,
         { new: true, runValidators: true },
         (err, result) => {
@@ -84,6 +66,8 @@ router.put('/post/update/:id', (req, res) => {
 
 })
 
+
+//@ok
 
 router.post('/add_post', (req, res) => {
 
@@ -107,5 +91,28 @@ router.post('/add_post', (req, res) => {
     })
 
 })
+
+
+router.post('/delete_post', async (req, res) => {
+
+    console.log("DELETE", req.body)
+
+    const { id } = req.body.id;
+
+    await Post.findOneAndDelete({ id },
+        (err, result) => {
+            if (err) throw err;
+            if (result) {
+                res.json({ msg: "Post Deleted Succesfully !" });
+            }
+            else {
+                res.json({
+                    message: "There is no post in this id !"
+                })
+            }
+        })
+
+})
+
 
 module.exports = router;

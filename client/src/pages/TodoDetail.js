@@ -1,26 +1,44 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 
-import { useParams, Link } from "react-router-dom";
-
-import { Get } from '../Util/Axios';
+import { useParams, Link, useHistory } from "react-router-dom";
 
 const PostDetail = () => {
 
     const { postId } = useParams();
+    let history = useHistory();
 
     const [postdetail, setPostDetail] = useState(null)
 
     useEffect(() => {
+        getTodo();
+    }, []);
 
-        Get(`http://localhost:5000/post/${postId}`).then((res) => {
-            console.log(res.data)
-            // set res to state
-            setPostDetail(res.data)
 
-        }).catch(() => {
-            console.log('error on getting data by id !')
-        })
-    }, [postId])
+    // Want to use async/await? Add the `async` keyword to your outer function/method.
+    async function getTodo() {
+        try {
+            const response = await axios.get(`http://localhost:5000/post/${postId}`);
+            console.log("SINGLE -> ", response.data);
+            setPostDetail(response.data)
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async function deleteTodo(id) {
+        console.log("DELETE")
+        console.log(id)
+        try {
+            const response = await axios.post(`http://localhost:5000/delete_post/`,
+                { id }
+            );
+            console.log("DELETED ", response.data);
+            history.push('/todos')
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     return (
         <div style={{ "padding": "1em 0" }}>
@@ -42,6 +60,7 @@ const PostDetail = () => {
                                 </div>
                                 <div class="card-footer bg-transparent">
                                     <Link className='btn btn-primary btn-md' to={`/todo/update/${postdetail._id}`}>EDIT</Link>
+                                    <span className='btn btn-primary btn-md' onClick={() => { deleteTodo(postdetail._id) }}>DELETE</span>
                                 </div>
                             </div>
                         </div>
