@@ -16,7 +16,7 @@ router.get('/all_posts', async (req, res) => {
 })
 
 
-// @ok
+// ok
 router.get('/post/:id', async (req, res) => {
 
     const { id } = req.params;
@@ -38,9 +38,10 @@ router.get('/post/:id', async (req, res) => {
 })
 
 // ok
-router.put('/post/update/:id', async (req, res) => {
 
-    const { id } = req.params;
+router.put('/post/update/', async (req, res) => {
+
+    const { id } = req.body.id;
 
     const data = {
         title: req.body.title,
@@ -93,6 +94,8 @@ router.post('/add_post', (req, res) => {
 })
 
 
+// ok
+
 router.post('/delete_post', async (req, res) => {
 
     console.log("DELETE", req.body)
@@ -111,8 +114,6 @@ router.post('/delete_post', async (req, res) => {
                 })
             }
         })
-
 })
-
 
 module.exports = router;

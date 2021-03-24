@@ -13,7 +13,7 @@ const PostList = () => {
         // api call
         //Get
         Get('http://localhost:5000/all_posts').then((res) => {
-            console.log(res.data)
+            console.log("ALL TODOS =====> ", res.data)
             // set res to state
             setPost(res.data)
             setLoading(false)
@@ -21,7 +21,7 @@ const PostList = () => {
             setLoading(false)
         })
 
-    }, [post])
+    }, [])
 
     return (
         <div style={{ "padding": "1em 0" }}>
@@ -34,11 +34,11 @@ const PostList = () => {
                     : post.map((postItem) => {
                         return (
                             <div className="card shadow my-4" key={postItem._id}>
-                                <div class="card-header">{postItem.title}</div>
-                                <div class="card-body">
-                                    <h5 class="card-title">{postItem.description}</h5>
+                                <div className="card-header">{postItem.title} {postItem.createdAt}</div>
+                                <div className="card-body">
+                                    <h5 className="card-title">{postItem.description}</h5>
                                 </div>
-                                <div class="card-footer bg-transparent">
+                                <div className="card-footer bg-transparent">
                                     <Link className='btn btn-primary btn-md' to={`/todo/${postItem._id}`}>Read More ...</Link>
                                 </div>
                             </div>

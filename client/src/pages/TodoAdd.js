@@ -13,7 +13,7 @@ const PostEdit = () => {
     const history = useHistory();
 
     const onSubmit = async (data) => {
-        console.log("FORMMMMMMMMMMMMMM", data);
+        console.log("FORM DATA ADDED =>>> ", data);
         try {
             const response = await axios.post(`http://localhost:5000/add_post/`,
                 { title: data.title, description: data.description }
