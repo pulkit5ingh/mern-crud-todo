@@ -11,9 +11,9 @@ export const Header = () => {
 
             <nav className="navbar navbar-expand-lg fixed-top shadow">
                 <div className="container">
-                    <Link to='/'><span className="navbar-brand link">TODOS APP</span></Link>
+                    <Link className="nav-link" to='/'><span className="navbar-brand link">TODOS APP</span></Link>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav mr-auto">
+                        <ul className="navbar-nav me-auto">
                             <li className="nav-item">
 
                                 <Link className="nav-link" to='/todos'>
@@ -30,7 +30,7 @@ export const Header = () => {
                         </ul>
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
-                                <Link to='/todo/add'>
+                                <Link className="nav-link" to='/todo/add'>
                                     <span className="add-btn shadow">ADD TODOS
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
                                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
