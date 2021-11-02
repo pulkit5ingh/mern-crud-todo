@@ -17,7 +17,7 @@ const PostDetail = () => {
 
     async function getTodo() {
         try {
-            const response = await axios.get(`http://localhost:5000/post/${postId}`);
+            const response = await axios.get(`http://localhost:5000/todo/${postId}`);
             console.log("SINGLE DATA BY _ID -> ", response.data);
             setPostDetail(response.data)
             setLoading(false)

@@ -2,22 +2,26 @@ const express = require("express");
 const router = express.Router();
 
 // model
-const Post = require("../models/Post");
+const TodoModel = require("../models/Todo");
 
 // ok
-router.get("/all_posts", async (req, res) => {
-  let todos = await Post.find();
+router.get("/all_todos", async (req, res) => {
+  let todos = await TodoModel.find({});
 
-  res.json({ todos });
+  if (todos) {
+    res.json({ todos });
+  } else {
+    res.json({ message: "something went wrong !" });
+  }
 });
 
 // ok
-router.get("/post/:id", async (req, res) => {
+router.get("/todo/:id", async (req, res) => {
   const { id } = req.params;
 
   console.log(req.params);
 
-  await Post.findById({ _id: id }, (err, result) => {
+  await TodoModel.findById({ _id: id }, (err, result) => {
     if (err) throw err;
     if (result) {
       res.json(result);
@@ -31,7 +35,7 @@ router.get("/post/:id", async (req, res) => {
 
 // ok
 
-router.put("/post/update/", async (req, res) => {
+router.put("/update_todo", async (req, res) => {
   const { id } = req.body.id;
 
   const data = {
@@ -60,30 +64,29 @@ router.put("/post/update/", async (req, res) => {
 
 //@ok
 
-router.post("/add_post", (req, res) => {
+router.post("/add_todo", (req, res) => {
   const { title, description } = req.body;
 
   console.log(req.body);
 
-  const newPost = new Post({
+  const newTodoModel = new TodoModel({
     title,
     description,
   });
 
-  newPost.save((err, result) => {
-    if (err) throw err;
-    if (result) {
-      res.json(result);
-      console.log(result);
-    } else {
-      res.json("SOMETHING IS REALLY WRONG !!!");
-    }
-  });
+  let saveData = newTodoModel.save();
+
+  if (saveData) {
+    res.json(newTodoModel);
+    console.log(newTodoModel);
+  } else {
+    res.json("SOMETHING IS REALLY WRONG !!!");
+  }
 });
 
 // ok
 
-router.post("/delete_post", async (req, res) => {
+router.post("/delete_todo", async (req, res) => {
   console.log("DELETE", req.body);
 
   const { id } = req.body.id;

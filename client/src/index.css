@@ -13,6 +13,29 @@ html {
   background: #f45b69;
 }
 
+/* Bootstrap remove blue borders */
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active {
+  outline: 0px !important;
+  -webkit-appearance: none;
+  box-shadow: none !important;
+}
+
+.form-control,
+.alert {
+  border-radius: 0%;
+}
+
 .float-btn {
   position: fixed;
   width: 60px;
@@ -51,6 +74,7 @@ h1 {
   border-radius: 0%;
   padding: 0.8rem 3rem;
   text-decoration: none;
+  box-shadow: 2px 2px 3px #999;
 }
 
 .add-btn:hover {
@@ -59,4 +83,9 @@ h1 {
   border-radius: 0%;
   padding: 0.8rem 3rem;
   text-decoration: none;
+}
+
+/* Alert */
+.alert-text {
+  font-size: 15px;
 }

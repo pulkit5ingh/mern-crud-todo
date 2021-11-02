@@ -1,100 +1,107 @@
-import React from 'react';
-
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-
-import { useForm, Controller } from "react-hook-form";
-
+import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 
-const PostEdit = () => {
+const TodoAdd = () => {
+  const history = useHistory();
 
-    const { control, register, handleSubmit, errors } = useForm();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
-    const history = useHistory();
+//   const onSubmit = (data) => console.log(data);
 
-    const onSubmit = async (data) => {
-        console.log("FORM DATA ADDED =>>> ", data);
-        try {
-            const response = await axios.post(`http://localhost:5000/add_post/`,
-                { title: data.title, description: data.description }
-            );
-            history.push('/todos')
-        } catch (error) {
-            console.error(error);
-        }
+  //   console.log(watch("title"));
 
-    };
+  const onSubmit = async (data) => {
+    console.log("FORM DATA ADDED =>>> ", data);
+    try {
+      const response = await axios.post(`http://localhost:5000/add_todo/`, {
+        title: data.title,
+        description: data.description,
+      });
+      history.push("/todos");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    return (
-        <div className="container">
-            <div style={{ padding: "1em 0", marginTop: "10%" }}>
-                <>
+  return (
+    <div className="container">
+      <div style={{ padding: "1em 0", marginTop: "10%" }}>
+        <>
+          <div className="row">
+            <div className="col col-md-6 col-sm-12 mx-auto">
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="form-group mb-3">
+                  <label class="form-label">Title</label>
+                  <input
+                    {...register("title", { required: true, maxLength: 20 })}
+                    type="text"
+                    className="form-control form-control-lg"
+                  />
+                </div>
+                {/* // * ===================== ALERT ================== */}
 
-                    <div className="row">
-
-                        <div className="col col-md-6 col-sm-12 mx-auto">
-
-
-                            <form onSubmit={handleSubmit(onSubmit)}>
-
-                                <div className="form-group">
-                                    <input type="text" className="form-control"
-                                        name="title"
-                                        control={control}
-                                        defaultValue=""
-                                        ref={register}
-                                        rules={{
-                                            required: {
-                                                value: true,
-                                                message: "Title is Required !"
-                                            },
-                                            minLength: {
-                                                value: 3,
-                                                message: 'Min length is 3 !'
-                                            }
-                                        }}
-
-                                    />
-                                </div>
-
-                                <div className="form-group">
-
-                                    <input type="text" className="form-control"
-                                        name="description"
-                                        control={control}
-                                        ref={register}
-                                        defaultValue=""
-                                        rules={{
-                                            required: {
-                                                value: true,
-                                                message: "Desc is Required !"
-                                            },
-                                            minLength: {
-                                                value: 5,
-                                                message: 'Min length is 5 !'
-                                            }
-                                        }}
-
-                                    />
-                                </div>
-
-
-                                {errors.title && errors.title.message}
-
-                                {errors.description && errors.description.message}
-
-                                <input type="submit" className="btn btn-primary" value="ADD" />
-
-                            </form>
-
-                        </div>
-
+                {errors.title?.type === "required" ? (
+                  <>
+                    <div
+                      className="alert alert-danger d-flex align-items-center p-2"
+                      role="alert"
+                    >
+                      <div className="alert-text">Title is required</div>
                     </div>
+                  </>
+                ) : (
+                  <></>
+                )}
 
-                </>
-            </div >
-        </div>
-    )
-}
+                {/* // * ===================== ALERT ================== */}
 
-export default PostEdit
+                <div className="form-group mb-3">
+                  <label class="form-label">Description</label>
+
+                  <input
+                    {...register("description", {
+                      required: true,
+                      maxLength: 20,
+                    })}
+                    type="text"
+                    className="form-control form-control-lg"
+                  />
+                </div>
+
+                {/* // * ===================== ALERT ================== */}
+
+                {errors.description?.type === "required" ? (
+                  <>
+                    <div
+                      className="alert alert-danger d-flex align-items-center p-2"
+                      role="alert"
+                    >
+                      <div className="alert-text">Description is required</div>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+
+                {/* // * ===================== ALERT ================== */}
+
+                <div class="d-grid gap-2">
+                  <input type="submit" className="btn add-btn" value="ADD" />
+                </div>
+              </form>
+            </div>
+          </div>
+        </>
+      </div>
+    </div>
+  );
+};
+
+export default TodoAdd;

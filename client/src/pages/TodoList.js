@@ -8,7 +8,7 @@ const PostList = () => {
   const [loading, setLoading] = useState(true);
 
   let getTodos = async () => {
-    let response = await axios("http://localhost:5000/all_posts");
+    let response = await axios("http://localhost:5000/all_todos");
     let todos = response.data.todos;
     setTodo(todos);
     setLoading(false);
@@ -17,22 +17,6 @@ const PostList = () => {
 
   useEffect(() => {
     getTodos();
-    // api call
-    //Get
-    // Get("http://localhost:5000/all_posts")
-    //   .then((res) => {
-    //     console.log("ALL TODOS =====> ", res.data);
-    //     // set res to state
-    //     setPost(res.data);
-    //     setLoading(false);
-    //   })
-    //   .catch(() => {
-    //     setLoading(false);
-    //   });
-
-    // let todos = await axios.get("http://localhost:5000/all_posts");
-
-    // console.log(todos);
   }, []);
 
   return (
@@ -42,7 +26,7 @@ const PostList = () => {
         {loading ? (
           <>loading....</>
         ) : (
-            todo.map((todoItem) => {
+          todo.map((todoItem) => {
             return (
               <div className="card shadow my-4" key={todoItem._id}>
                 <div className="card-header">
